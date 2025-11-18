@@ -4,7 +4,7 @@ import { Field } from 'formik';
 import React from 'react';
 
 export interface InputFieldProps
-  extends Partial<React.InputHTMLAttributes<HTMLInputElement>> {
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   disabled?: boolean;
 }
