@@ -1,7 +1,9 @@
 'use client';
 
-import Modal, { ModalProps } from './modal';
-import CompanyForm, { CompanyFormProps } from './company-form';
+import Modal, { ModalProps } from '@/src/app/components/modal';
+import CompanyForm, {
+  CompanyFormProps,
+} from '@/src/app/components/company-form';
 
 export interface CompanyFormModalProps extends ModalProps {
   onSubmit: CompanyFormProps['onSubmit'];

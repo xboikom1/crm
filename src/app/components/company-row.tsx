@@ -1,7 +1,6 @@
-import React from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
-import StatusLabel, { Status } from './status-label';
+import StatusLabel, { Status } from '@/src/app/components/status-label';
 
 export interface CompanyRowProps {
   id: number;
