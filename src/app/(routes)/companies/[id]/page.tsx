@@ -1,4 +1,3 @@
-import Header from '@/src/app/components/header';
 import { notFound } from 'next/navigation';
 import { use } from 'react';
 
@@ -9,13 +8,11 @@ export interface CompanyPageProps {
 export default function CompanyPage({ params }: CompanyPageProps) {
   const id = Number.parseInt(use(params).id);
 
-  if (Number.isNaN(id)) {
-    notFound();
-  }
+  if (Number.isNaN(id)) notFound();
 
   return (
-    <>
-      <Header>Companies {id}</Header>
-    </>
+    <div className="py-6 px-10">
+      <p>{`Information about company (${id})`}</p>
+    </div>
   );
 }
