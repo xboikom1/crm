@@ -5,7 +5,12 @@ import DashboardCard from '@/src/app/components/dashboard-card';
 import { getPromotions } from '@/src/lib/api';
 
 export default async function Page() {
-  const data = await getPromotions();
+  const data = await getPromotions(
+    {},
+    {
+      next: { revalidate: 10 },
+    },
+  );
 
   return (
     <DashboardCard label="Promotions">

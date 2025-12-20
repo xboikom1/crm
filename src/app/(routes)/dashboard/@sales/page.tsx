@@ -5,7 +5,9 @@ import SummaryTableCell from '@/src/app/components/summary-table-cell';
 import DashboardCard from '@/src/app/components/dashboard-card';
 
 export default async function Page() {
-  const data = await getSummarySales();
+  const data = await getSummarySales({
+    next: { revalidate: 10 },
+  });
 
   return (
     <DashboardCard label="Sales details">
