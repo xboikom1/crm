@@ -1,4 +1,4 @@
-import { getSummarySales } from '@/src/utils/api';
+import { getSummarySales } from '@/src/lib/api';
 import SummaryTable from '@/src/app/components/summary-table';
 import SummaryTableHeader from '@/src/app/components/summary-table-header';
 import SummaryTableCell from '@/src/app/components/summary-table-cell';

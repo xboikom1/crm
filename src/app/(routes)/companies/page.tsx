@@ -1,8 +1,11 @@
 import CompanyTable from '@/src/app/components/company-table';
 import CompanyRow from '@/src/app/components/company-row';
 import { Status } from '@/src/app/components/status-label';
+import { getCompanies } from '@/src/lib/api';
 
-export default function CompaniesPage() {
+export default async function CompaniesPage() {
+  const companies = await getCompanies();
+
   return (
     <CompanyTable>
       <CompanyRow
