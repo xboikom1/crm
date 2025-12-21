@@ -1,22 +1,22 @@
 import CompanyTable from '@/src/app/components/company-table';
-import CompanyRow from '@/src/app/components/company-row';
-import { Status } from '@/src/app/components/status-label';
 import { getCompanies } from '@/src/lib/api';
+import getQueryClient from '@/src/lib/utils/getQueryClient';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 export default async function CompaniesPage() {
-  const companies = await getCompanies();
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['companies'],
+    queryFn: () => getCompanies({ cache: 'no-store' }),
+    staleTime: 10 * 1000,
+  });
+
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <CompanyTable>
-      <CompanyRow
-        id={1}
-        category={'Products'}
-        company={'Acme Corp'}
-        status={Status.Pending}
-        promotion={true}
-        country="USA"
-        joinedDate={'2025-05-27'}
-      />
-    </CompanyTable>
+    <HydrationBoundary state={dehydratedState}>
+      <CompanyTable />
+    </HydrationBoundary>
   );
 }

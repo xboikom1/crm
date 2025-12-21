@@ -22,7 +22,7 @@ export default async function Page() {
             <StatCard
               type={StatCardType.Dark}
               label={title}
-              counter={count[id]}
+              counter={count[id] ?? 0}
             />
           </div>
         ))}

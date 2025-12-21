@@ -1,11 +1,22 @@
 import Header from '@/src/app/components/header';
-import { use } from 'react';
+import { Company, getCompany } from '@/src/lib/api';
+import getQueryClient from '@/src/lib/utils/getQueryClient';
 
 export interface PageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
-export default function Page({ params }: PageProps) {
-  const { id } = use(params);
-  return <Header>{`Company (${id})`}</Header>;
+export default async function Page({ params }: PageProps) {
+  const { id } = await params;
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['companies', id],
+    queryFn: () => getCompany(id, { cache: 'no-store' }),
+    staleTime: 10 * 1000,
+  });
+
+  const company = queryClient.getQueryData(['companies', id]) as Company;
+
+  return <Header>{`Company (${company.title})`}</Header>;
 }
