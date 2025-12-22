@@ -3,12 +3,13 @@ import SearchInput from '@/src/app/components/search-input';
 import Toolbar from '@/src/app/components/toolbar';
 
 export interface PageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
-export default function Page({ params }: PageProps) {
+export default async function Page({ params }: PageProps) {
+  const { id } = await params;
   return (
-    <Toolbar action={<AddPromotionButton companyId={params.id} />}>
+    <Toolbar action={<AddPromotionButton companyId={id} />}>
       <SearchInput />
     </Toolbar>
   );
