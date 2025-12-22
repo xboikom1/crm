@@ -54,19 +54,19 @@ export interface Promotion {
   avatar?: string;
 }
 
-const stringifyQueryParams = (params: Record<string, string>) =>
-  new URLSearchParams(params).toString();
-
 const buildApiUrl = (path: string, params: Record<string, string> = {}) => {
   let base = '';
 
-  if (process.env.NEXT_PUBLIC_BASE_URL) base = process.env.NEXT_PUBLIC_BASE_URL;
-  else base = 'http://localhost:3000';
+  if (process.env.NEXT_PUBLIC_BASE_URL) {
+    base = process.env.NEXT_PUBLIC_BASE_URL;
+  } else {
+    base = 'http://localhost:3000';
+  }
+  const url = new URL(path, base);
 
   const hasParams = Object.keys(params).length > 0;
+  if (hasParams) url.search = new URLSearchParams(params).toString();
 
-  const url = new URL(path, base);
-  if (hasParams) url.search = stringifyQueryParams(params);
   return url.toString();
 };
 
@@ -107,4 +107,14 @@ export const getPromotions = async (
   init?: RequestInit,
 ) => {
   return sendRequest<Promotion[]>(buildApiUrl('/api/promotions', params), init);
+};
+
+export const createPromotion = (data: Omit<Promotion, 'id'>) => {
+  return sendRequest<Promotion>(buildApiUrl('/api/promotions'), {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
 };

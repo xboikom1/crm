@@ -15,3 +15,17 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json(promotions);
 }
+
+export async function POST(request: NextRequest) {
+  const body = await request.json();
+  const db = await getDb();
+
+  const newPromotion: Promotion = {
+    ...body,
+    id: crypto.randomUUID(),
+  };
+
+  await db.collection<Promotion>('promotions').insertOne(newPromotion);
+
+  return NextResponse.json(newPromotion, { status: 201 });
+}
