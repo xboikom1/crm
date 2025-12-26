@@ -1,9 +1,9 @@
-import CompanyTable from '@/src/app/components/company-table';
 import { getCompanies } from '@/src/lib/api';
 import getQueryClient from '@/src/lib/utils/getQueryClient';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import CompaniesClientWrapper from '@/src/app/components/companies-client-wrapper';
 
-export default async function CompaniesPage() {
+export default async function Page() {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
@@ -16,7 +16,7 @@ export default async function CompaniesPage() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <CompanyTable />
+      <CompaniesClientWrapper />
     </HydrationBoundary>
   );
 }

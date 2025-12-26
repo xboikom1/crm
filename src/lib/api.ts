@@ -94,8 +94,9 @@ export const getCategories = (init?: RequestInit) => {
   return sendRequest<Category[]>(buildApiUrl('/api/categories'), init);
 };
 
-export const getCompanies = (init?: RequestInit) => {
-  return sendRequest<Company[]>(buildApiUrl('/api/companies'), init);
+
+export const getCompanies = (params: Record<string, string> = {}, init?: RequestInit) => {
+  return sendRequest<Company[]>(buildApiUrl('/api/companies', params), init);
 };
 
 export const getCompany = (id: string, init?: RequestInit) => {

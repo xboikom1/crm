@@ -1,7 +1,7 @@
 import React from 'react';
 
 export interface ToolbarProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   action?: React.ReactNode;
 }
 

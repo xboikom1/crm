@@ -13,10 +13,14 @@ const headers = [
   'Joined date',
 ];
 
-export default function CompanyTable() {
-  const { data } = useQuery({
-    queryKey: ['companies'],
-    queryFn: () => getCompanies(),
+export interface CompanyTableProps {
+  filterQuery: string;
+}
+
+export default function CompanyTable({ filterQuery }: CompanyTableProps) {
+  const { data, isFetching } = useQuery({
+    queryKey: ['companies', filterQuery],
+    queryFn: () => getCompanies(filterQuery ? { title: filterQuery } : {}),
     staleTime: 10 * 1000,
   });
 
@@ -33,9 +37,23 @@ export default function CompanyTable() {
           </tr>
         </thead>
         <tbody>
-          {data?.map((company) => (
-            <CompanyRow key={company.id} company={company} />
-          ))}
+          {isFetching ? (
+            <tr>
+              <td colSpan={headers.length} className="text-center">
+                Loading...
+              </td>
+            </tr>
+          ) : data?.length ? (
+            data.map((company) => (
+              <CompanyRow key={company.id} company={company} />
+            ))
+          ) : (
+            <tr>
+              <td colSpan={headers.length} className="text-center">
+                No companies found
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>
