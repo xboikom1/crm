@@ -4,10 +4,10 @@ import { getDb } from '@/src/lib/mongodb';
 
 export async function GET(
   request: NextRequest,
-  context: { params: { id: string } },
+  context: { params: Promise<{ id: string }> },
 ) {
   const db = await getDb();
-  const id = context.params.id;
+  const { id } = await context.params;
 
   const company = await db
     .collection<Company>('companies')
