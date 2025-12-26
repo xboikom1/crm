@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# CRM Dashboard
 
-## Getting Started
+A modern CRM dashboard built with **Next.js App Router**, **React**, **MongoDB**, and **React Query**.  
+The app provides a small but complete example of a CRM system: companies, promotions, sales statistics, and geographic distribution.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Dashboard overview**
+  - Global statistics (promotions, categories, new and active companies)
+  - Sales table with sold units and income
+  - Promotions overview
+  - Companies grouped by country and category
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Companies**
+  - Companies list with key attributes
+  - Available filtering and aggregation
+  - Company–promotion relationships
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Promotions**
+  - Full CRUD API for promotions
+  - Linking promotions to companies
 
-## Learn More
+- **Real database**
+  - All data is stored in **MongoDB Atlas**
+  - API routes use typed models and a shared DB client
 
-To learn more about Next.js, take a look at the following resources:
+- **Production deployment**
+  - Deployed on **Vercel**
+  - Uses environment‑based configuration for API and database
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tech Stack
 
-## Deploy on Vercel
+### Frontend
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Next.js**
+  - Server Components and Route Handlers
+  - File‑system routing under `app/`
+- **React**
+- **React Query (@tanstack/react-query v5)**
+  - Data fetching, caching and prefetching
+  - Server‑side prefetch + `HydrationBoundary` for seamless hydration
+- **Tailwind CSS**
+  - Utility‑first styling
+  - Responsive layout for dashboard, tables and cards
+- **Headless UI (@headlessui/react)**
+  - Accessible, unstyled components
+- **clsx**
+  - Clean and composable conditional classNames
+- **Formik**
+  - Form state and validation (for interactive forms like promotions)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Backend
+
+- **Next.js Route Handlers**
+  - REST‑like endpoints for:
+    - `/api/companies`
+    - `/api/promotions`
+    - `/api/summary-stats`
+    - `/api/summary-sales`
+    - `/api/countries`
+    - `/api/categories`
+- **MongoDB Node.js Driver**
+  - Single connection helper in `src/lib/mongodb.ts`
+  - Collections: `companies`, `promotions`, `summary-stats`, `summary-sales`, `countries`, `categories`
+
+### Tooling & Quality
+
+- **TypeScript**
+  - Strict typing for API models and UI components
+- **ESLint + eslint-config-next**
+  - Linting tailored for Next.js and React
+- **Prettier**
+  - Consistent code style integrated with ESLint
+- **PostCSS + Autoprefixer**
+  - Modern CSS pipeline
+
+---
+
+## Architecture & Good Practices
+
+- **Separation of concerns**
+  - `src/lib/api.ts` contains all typed API clients (e.g. `getCompanies`, `getPromotions`).
+  - `app/api/**/route.ts` contains HTTP handlers and database access.
+  - UI components live in `app/components/**`.
+
+- **Typed domain models**
+  - Interfaces for `Company`, `Promotion`, `SummaryStats`, `SummarySales`, `Country`, `Category`.
+  - Frontend and backend share the same types to avoid runtime mismatches.
+
+- **React Query + SSR**
+  - Data for pages like `/companies` and dashboard widgets is **prefetched on the server** via React Query.
+  - Prefetched state is dehydrated and re‑hydrated on the client, so data is instantly available and stays in sync.
+
+- **Environment‑based configuration**
+  - MongoDB credentials and DB name are injected via environment variables.
+  - `NEXT_PUBLIC_BASE_URL` is used to build API URLs in both dev and production.
+  - The app is designed to run both locally and on Vercel without code changes.
+
+- **Scalable API design**
+  - Route handlers mirror real‑world REST APIs (list, details, filtered queries, create).
+  - `GET` and `POST` methods are implemented for promotions as an example of write operations.
