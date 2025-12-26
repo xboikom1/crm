@@ -1,14 +1,14 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { getSummaryStats } from '@/src/lib/api';
+import { getSummarySales } from '@/src/lib/api';
 import getQueryClient from '@/src/lib/utils/getQueryClient';
-import DashboardStatsClient from '@/src/app/components/dashboard-clients/dashboard-stats-client';
+import DashboardSalesClient from '@/src/app/components/dashboard-clients/dashboard-sales-client';
 
 export default async function Page() {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
-    queryKey: ['summary-stats'],
-    queryFn: () => getSummaryStats({ cache: 'no-store' }),
+    queryKey: ['summary-sales'],
+    queryFn: () => getSummarySales({ cache: 'no-store' }),
     staleTime: 10_000,
   });
 
@@ -16,7 +16,7 @@ export default async function Page() {
 
   return (
     <HydrationBoundary state={dehydratedState}>
-      <DashboardStatsClient />
+      <DashboardSalesClient />
     </HydrationBoundary>
   );
 }
