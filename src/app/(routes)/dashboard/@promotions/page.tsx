@@ -1,36 +1,22 @@
-import SummaryTable from '@/src/app/components/summary-table';
-import SummaryTableHeader from '@/src/app/components/summary-table-header';
-import SummaryTableCell from '@/src/app/components/summary-table-cell';
-import DashboardCard from '@/src/app/components/dashboard-card';
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { getPromotions } from '@/src/lib/api';
+import getQueryClient from '@/src/lib/utils/getQueryClient';
+import DashboardPromotionsClient from '@/src/app/components/dashboard-clients/dashboard-promotions-client';
 
 export default async function Page() {
-  const data = await getPromotions(
-    {},
-    {
-      next: { revalidate: 10 },
-    },
-  );
+  const queryClient = getQueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ['promotions'],
+    queryFn: () => getPromotions({}, { cache: 'no-store' }),
+    staleTime: 10_000,
+  });
+
+  const dehydratedState = dehydrate(queryClient);
 
   return (
-    <DashboardCard label="Promotions">
-      <SummaryTable
-        headers={
-          <>
-            <SummaryTableHeader>Company</SummaryTableHeader>
-            <SummaryTableHeader>Name</SummaryTableHeader>
-            <SummaryTableHeader align="center">%</SummaryTableHeader>
-          </>
-        }
-      >
-        {data.map(({ id, title, companyTitle, discount }) => (
-          <tr key={id}>
-            <SummaryTableCell>{companyTitle}</SummaryTableCell>
-            <SummaryTableCell>{title}</SummaryTableCell>
-            <SummaryTableCell align="center">{`-${discount}%`}</SummaryTableCell>
-          </tr>
-        ))}
-      </SummaryTable>
-    </DashboardCard>
+    <HydrationBoundary state={dehydratedState}>
+      <DashboardPromotionsClient />
+    </HydrationBoundary>
   );
 }
