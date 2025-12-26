@@ -78,36 +78,86 @@ const sendRequest = async <T>(url: string, init?: RequestInit) => {
   return (await res.json()) as T;
 };
 
-export const getSummaryStats = (init?: RequestInit) => {
-  return sendRequest<SummaryStats>(buildApiUrl('/api/summary-stats/1'), init);
+export const getSummaryStats = async (init?: RequestInit) => {
+  try {
+    return await sendRequest<SummaryStats>(
+      buildApiUrl('/api/summary-stats'),
+      init,
+    );
+  } catch {
+    return {
+      promotions: 0,
+      categories: 0,
+      newCompanies: 0,
+      activeCompanies: 0,
+    };
+  }
 };
 
-export const getSummarySales = (init?: RequestInit) => {
-  return sendRequest<SummarySales[]>(buildApiUrl('/api/summary-sales'), init);
+export const getSummarySales = async (init?: RequestInit) => {
+  try {
+    return await sendRequest<SummarySales[]>(
+      buildApiUrl('/api/summary-sales'),
+      init,
+    );
+  } catch {
+    return [];
+  }
 };
 
-export const getCountries = (init?: RequestInit) => {
-  return sendRequest<Country[]>(buildApiUrl('/api/countries'), init);
+export const getCountries = async (init?: RequestInit) => {
+  try {
+    return await sendRequest<Country[]>(buildApiUrl('/api/countries'), init);
+  } catch {
+    return [];
+  }
 };
 
-export const getCategories = (init?: RequestInit) => {
-  return sendRequest<Category[]>(buildApiUrl('/api/categories'), init);
+export const getCategories = async (init?: RequestInit) => {
+  try {
+    return await sendRequest<Category[]>(buildApiUrl('/api/categories'), init);
+  } catch {
+    return [];
+  }
 };
 
-
-export const getCompanies = (params: Record<string, string> = {}, init?: RequestInit) => {
-  return sendRequest<Company[]>(buildApiUrl('/api/companies', params), init);
+export const getCompanies = async (
+  params: Record<string, string> = {},
+  init?: RequestInit,
+) => {
+  try {
+    return await sendRequest<Company[]>(
+      buildApiUrl('/api/companies', params),
+      init,
+    );
+  } catch {
+    return [];
+  }
 };
 
-export const getCompany = (id: string, init?: RequestInit) => {
-  return sendRequest<Company>(buildApiUrl(`/api/companies/${id}`), init);
+export const getCompany = async (id: string, init?: RequestInit) => {
+  try {
+    return await sendRequest<Company>(
+      buildApiUrl(`/api/companies/${id}`),
+      init,
+    );
+  } catch {
+    return null;
+  }
 };
 
 export const getPromotions = async (
   params: Record<string, string> = {},
   init?: RequestInit,
 ) => {
-  return sendRequest<Promotion[]>(buildApiUrl('/api/promotions', params), init);
+  try {
+    return await sendRequest<Promotion[]>(
+      buildApiUrl('/api/promotions', params),
+      init,
+    );
+  } catch {
+    return [];
+  }
 };
 
 export const createPromotion = (data: Omit<Promotion, 'id'>) => {

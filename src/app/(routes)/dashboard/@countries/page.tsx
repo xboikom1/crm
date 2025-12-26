@@ -5,12 +5,8 @@ import DashboardCard from '@/src/app/components/dashboard-card';
 import getCountById from '@/src/lib/utils/getCountsById';
 
 export default async function Page() {
-  const countries = await getCountries({
-    next: { revalidate: 10 },
-  });
-  const companies = await getCompanies({
-    next: { revalidate: 10 },
-  });
+  const countries = await getCountries();
+  const companies = await getCompanies();
 
   const count = getCountById(companies, 'countryId');
   return (
