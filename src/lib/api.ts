@@ -136,14 +136,7 @@ export const getCompanies = async (
 };
 
 export const getCompany = async (id: string, init?: RequestInit) => {
-  try {
-    return await sendRequest<Company>(
-      buildApiUrl(`/api/companies/${id}`),
-      init,
-    );
-  } catch {
-    return null;
-  }
+  return await sendRequest<Company>(buildApiUrl(`/api/companies/${id}`), init);
 };
 
 export const getPromotions = async (

@@ -5,7 +5,6 @@ import Toolbar from '@/src/app/components/toolbar';
 import { getCompany, getPromotions } from '@/src/lib/api';
 import getQueryClient from '@/src/lib/utils/getQueryClient';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
-import { notFound } from 'next/navigation';
 
 export interface CompanyPageProps {
   params: { id: string };
@@ -13,10 +12,9 @@ export interface CompanyPageProps {
 
 export default async function CompanyPage({ params }: CompanyPageProps) {
   const { id } = params;
-
   const queryClient = getQueryClient();
 
-  const company = await queryClient.fetchQuery({
+  await queryClient.prefetchQuery({
     queryKey: ['companies', id],
     queryFn: () => getCompany(id, { cache: 'no-store' }),
     staleTime: 10 * 1000,
@@ -27,10 +25,6 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
     queryFn: () => getPromotions({ companyId: id }, { cache: 'no-store' }),
     staleTime: 10 * 1000,
   });
-
-  if (!company) {
-    notFound();
-  }
 
   const dehydratedState = dehydrate(queryClient);
 
