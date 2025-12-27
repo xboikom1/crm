@@ -8,15 +8,11 @@ export interface PageProps {
 export default async function Page({ params }: PageProps) {
   const { id } = params;
 
-  let title = '';
+  let title = 'Company ';
 
-  try {
-    const company = await getCompany(id, { cache: 'no-store' });
-    if (company?.title) {
-      title = `Company (${company.title})`;
-    }
-  } catch (e) {
-    console.error('Header getCompany error', e);
+  const company = await getCompany(id, { cache: 'no-store' });
+  if (company?.title) {
+    title += company.title;
   }
 
   return <Header>{title}</Header>;
