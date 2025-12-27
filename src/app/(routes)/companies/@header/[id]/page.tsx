@@ -6,9 +6,9 @@ export interface PageProps {
 }
 
 export default async function Page({ params }: PageProps) {
-  const { id } = params;
+  const { id } = await params;
   const company = await getCompany(id, { cache: 'no-store' });
-  const title = company?.title ?? 'Company';
+  const title = company?.title ?? '';
 
   return <Header>{`Company (${title})`}</Header>;
 }

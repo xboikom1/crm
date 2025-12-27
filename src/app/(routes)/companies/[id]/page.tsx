@@ -11,7 +11,7 @@ export interface CompanyPageProps {
 }
 
 export default async function CompanyPage({ params }: CompanyPageProps) {
-  const { id } = params;
+  const { id } = await params;
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery({
