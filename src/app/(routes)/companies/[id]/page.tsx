@@ -2,7 +2,7 @@ import AddPromotionButton from '@/src/app/components/add-promotion-button';
 import CompanyInfo from '@/src/app/components/company-info';
 import CompanyPromotions from '@/src/app/components/company-promotions';
 import Toolbar from '@/src/app/components/toolbar';
-import { Company, getCompany, getPromotions } from '@/src/lib/api';
+import { getCompany, getPromotions } from '@/src/lib/api';
 import getQueryClient from '@/src/lib/utils/getQueryClient';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import { notFound } from 'next/navigation';
@@ -12,10 +12,11 @@ export interface CompanyPageProps {
 }
 
 export default async function CompanyPage({ params }: CompanyPageProps) {
-  const { id } = await params;
+  const { id } = params;
+
   const queryClient = getQueryClient();
 
-  await queryClient.prefetchQuery({
+  const company = await queryClient.fetchQuery({
     queryKey: ['companies', id],
     queryFn: () => getCompany(id, { cache: 'no-store' }),
     staleTime: 10 * 1000,
@@ -26,8 +27,6 @@ export default async function CompanyPage({ params }: CompanyPageProps) {
     queryFn: () => getPromotions({ companyId: id }, { cache: 'no-store' }),
     staleTime: 10 * 1000,
   });
-
-  const company = queryClient.getQueryData(['companies', id]) as Company;
 
   if (!company) {
     notFound();
