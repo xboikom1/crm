@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
-import { getCompany } from '@/src/lib/api';
+import { Company, getCompany } from '@/src/lib/api';
 import StatusLabel from '@/src/app/components/status-label';
 
 export interface CompanyInfoProps {
@@ -10,13 +10,16 @@ export interface CompanyInfoProps {
 }
 
 export default function CompanyInfo({ companyId }: CompanyInfoProps) {
-  const { data: company } = useQuery({
+  const { data, isLoading, error } = useQuery<Company | null>({
     queryKey: ['companies', companyId],
-    queryFn: () => getCompany(companyId),
-    staleTime: 10 * 1000,
+    queryFn: () => getCompany(companyId, { cache: 'no-store' }),
   });
 
-  if (!company) return null;
+  if (isLoading) return <div>Loading...</div>;
+  if (error || !data) return <div>Company not found</div>;
+
+  const company = data;
+
   return (
     <div className="flex flex-col gap-5">
       <div className="flex flex-col items-center p-7 gap-5 bg-gray-900 rounded">
