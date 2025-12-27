@@ -136,7 +136,6 @@ export const getCompanies = async (
 };
 
 export const getCompany = async (id: string, init?: RequestInit) => {
-  console.log('getCompany id:', id);
   try {
     return await sendRequest<Company>(
       buildApiUrl(`/api/companies/${id}`),
