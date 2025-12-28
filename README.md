@@ -97,8 +97,7 @@ The app provides a small but complete example of a CRM system: companies, promot
 
 - **Environment‑based configuration**
   - MongoDB credentials and DB name are injected via environment variables.
-  - `NEXT_PUBLIC_BASE_URL` is used to build API URLs in both dev and production.
-  - The app is designed to run both locally and on Vercel without code changes.
+  - `NEXT_PUBLIC_BASE_URL` is used to build API URLs.
 
 - **Scalable API design**
   - Route handlers mirror real‑world REST APIs (list, details, filtered queries, create).
