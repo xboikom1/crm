@@ -3,6 +3,7 @@ import { Db, MongoClient } from 'mongodb';
 const username = process.env.MONGO_DB_USERNAME;
 const password = process.env.MONGO_DB_PASSWORD;
 const collection = process.env.MONGODB_DB_COLLECTION || 'companies';
+const mongoUri = process.env.MONGODB_URI;
 
 if (!username || !password) {
   throw new Error(
@@ -11,9 +12,6 @@ if (!username || !password) {
 }
 
 export const getDb = async (): Promise<Db> => {
-  const clientPromise = new MongoClient(
-    `mongodb+srv://${username}:${password}@crm.yrses3h.mongodb.net/?retryWrites=true&w=majority`,
-  );
-  const client = await clientPromise;
+  const client = new MongoClient(mongoUri as string);
   return client.db(collection);
 };
