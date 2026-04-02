@@ -1,13 +1,11 @@
 import { Db, MongoClient } from 'mongodb';
 
-const username = process.env.MONGO_DB_USERNAME;
-const password = process.env.MONGO_DB_PASSWORD;
-const collection = process.env.MONGODB_DB_COLLECTION || 'companies';
 const mongoUri = process.env.MONGODB_URI;
+const collection = process.env.MONGODB_DB_COLLECTION || 'companies';
 
-if (!username || !password) {
+if (!mongoUri) {
   throw new Error(
-    'Missing MongoDB username or password environment variables.',
+    'Missing MongoDB uri environment variable.',
   );
 }
 
