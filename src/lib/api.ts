@@ -1,84 +1,16 @@
-export interface SummaryStats {
-  promotions: number;
-  categories: number;
-  newCompanies: number;
-  activeCompanies: number;
-}
+import {
+  Category,
+  Company,
+  Promotion,
+  SummarySales,
+  SummaryStats,
+  Country,
+} from '@/src/lib/types';
+import { buildApiUrl, sendRequest } from '@/src/lib/api-helpers';
 
-export interface SummarySales {
-  id: string;
-  companyId: string;
-  companyTitle: string;
-  sold: number;
-  income: number;
-}
-
-export interface Country {
-  id: string;
-  title: string;
-}
-
-export interface Category {
-  id: string;
-  title: string;
-}
-
-export enum CompanyStatus {
-  Active = 'active',
-  NotActive = 'notActive',
-  Pending = 'pending',
-  Suspended = 'suspended',
-}
-
-export interface Company {
-  id: string;
-  title: string;
-  description: string;
-  status: CompanyStatus;
-  joinedDate: string;
-  hasPromotions: boolean;
-  categoryId: string;
-  categoryTitle: string;
-  countryId: string;
-  countryTitle: string;
-  avatar?: string;
-}
-
-export interface Promotion {
-  id: string;
-  title: string;
-  description: string;
-  discount: number;
-  companyId: string;
-  companyTitle: string;
-  avatar?: string;
-}
-
-const buildApiUrl = (path: string, params: Record<string, string> = {}) => {
-  let base = '';
-
-  if (process.env.NEXT_PUBLIC_BASE_URL) {
-    base = process.env.NEXT_PUBLIC_BASE_URL;
-  } else {
-    base = 'http://localhost:3000';
-  }
-  const url = new URL(path, base);
-
-  const hasParams = Object.keys(params).length > 0;
-  if (hasParams) url.search = new URLSearchParams(params).toString();
-
-  return url.toString();
-};
-
-const sendRequest = async <T>(url: string, init?: RequestInit) => {
-  const res = await fetch(url, init);
-
-  if (!res.ok) throw new Error(await res.text());
-
-  return (await res.json()) as T;
-};
-
-export const getSummaryStats = async (init?: RequestInit) => {
+export const getSummaryStats = async (
+  init?: RequestInit,
+): Promise<SummaryStats> => {
   try {
     return await sendRequest<SummaryStats>(
       buildApiUrl('/api/summary-stats'),
@@ -94,7 +26,9 @@ export const getSummaryStats = async (init?: RequestInit) => {
   }
 };
 
-export const getSummarySales = async (init?: RequestInit) => {
+export const getSummarySales = async (
+  init?: RequestInit,
+): Promise<SummarySales[]> => {
   try {
     return await sendRequest<SummarySales[]>(
       buildApiUrl('/api/summary-sales'),
@@ -135,7 +69,10 @@ export const getCompanies = async (
   }
 };
 
-export const getCompany = async (id: string, init?: RequestInit) => {
+export const getCompany = async (
+  id: string,
+  init?: RequestInit,
+): Promise<Company> => {
   return await sendRequest<Company>(buildApiUrl(`/api/companies/${id}`), init);
 };
 
