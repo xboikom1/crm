@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { Country } from '@/src/lib/api';
+import { Country } from '@/src/lib/types';
 import { getDb } from '@/src/lib/mongodb';
 
 export async function GET() {

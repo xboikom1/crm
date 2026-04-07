@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
-import { Company, getCompany } from '@/src/lib/api';
+import { getCompany } from '@/src/lib/api';
+import { Company } from '@/src/lib/types';
 import StatusLabel from '@/src/app/components/ui_general/status-label';
 
 export interface CompanyInfoProps {

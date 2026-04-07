@@ -2,7 +2,7 @@ import Image from 'next/image';
 import clsx from 'clsx';
 import StatusLabel from '@/src/app/components/ui_general/status-label';
 import Link from 'next/link';
-import { Company } from '@/src/lib/api';
+import { Company } from '@/src/lib/types';
 
 export interface CompanyRowProps {
   company: Company;

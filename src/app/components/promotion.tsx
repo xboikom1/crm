@@ -1,4 +1,4 @@
-import { Promotion } from '@/src/lib/api';
+import { Promotion } from '@/src/lib/types';
 import Image from 'next/image';
 
 export interface PromotionProps {

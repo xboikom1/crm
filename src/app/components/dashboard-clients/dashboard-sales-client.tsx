@@ -1,7 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getSummarySales, SummarySales } from '@/src/lib/api';
+import { getSummarySales} from '@/src/lib/api';
+import { SummarySales} from '@/src/lib/types';
 import SummaryTable from '@/src/app/components/ui_table/summary-table';
 import SummaryTableHeader from '@/src/app/components/ui_table/summary-table-header';
 import SummaryTableCell from '@/src/app/components/ui_table/summary-table-cell';

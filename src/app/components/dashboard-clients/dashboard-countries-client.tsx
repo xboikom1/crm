@@ -3,7 +3,8 @@
 import { useQuery } from '@tanstack/react-query';
 import Image from 'next/image';
 import clsx from 'clsx';
-import { getCompanies, getCountries, Country, Company } from '@/src/lib/api';
+import { getCompanies, getCountries } from '@/src/lib/api';
+import { Company, Country } from '@/src/lib/types';
 import DashboardCard from '@/src/app/components/dashboard-card';
 import getCountById from '@/src/lib/utils/getCountsById';
 

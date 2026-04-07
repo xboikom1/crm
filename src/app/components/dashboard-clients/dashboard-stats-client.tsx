@@ -1,7 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getSummaryStats, SummaryStats } from '@/src/lib/api';
+import { getSummaryStats } from '@/src/lib/api';
+import { SummaryStats } from '@/src/lib/types';
 import StatCard, {
   StatCardType,
 } from '@/src/app/components/stat-card/stat-card';

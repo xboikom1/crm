@@ -1,7 +1,8 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { getPromotions, Promotion } from '@/src/lib/api';
+import { getPromotions } from '@/src/lib/api';
+import { Promotion } from '@/src/lib/types';
 import SummaryTable from '@/src/app/components/ui_table/summary-table';
 import SummaryTableHeader from '@/src/app/components/ui_table/summary-table-header';
 import SummaryTableCell from '@/src/app/components/ui_table/summary-table-cell';

@@ -3,7 +3,7 @@
 import { useQuery } from '@tanstack/react-query';
 import Header from '@/src/app/components/ui_layout/header';
 import { getCompany } from '@/src/lib/api';
-import { Company} from '@/src/lib/api';
+import { Company} from '@/src/lib/types';
 
 interface CompanyHeaderClientProps {
   companyId: string;
