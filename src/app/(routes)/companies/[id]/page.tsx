@@ -1,7 +1,7 @@
 import AddPromotionButton from '@/src/app/components/add-promotion-button';
 import CompanyInfo from '@/src/app/components/company-info';
 import CompanyPromotions from '@/src/app/components/company-promotions';
-import Toolbar from '@/src/app/components/toolbar';
+import Toolbar from '@/src/app/components/ui_general/toolbar';
 import { getCompany, getPromotions } from '@/src/lib/api';
 import getQueryClient from '@/src/lib/utils/getQueryClient';
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';

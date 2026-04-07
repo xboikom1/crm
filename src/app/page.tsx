@@ -1,6 +1,6 @@
 import Image from 'next/image';
-import HeroSection from './components/hero-section';
-import FeaturesGrid from './components/features-grid';
+import HeroSection from './components/ui_layout/hero-section';
+import FeaturesGrid from './components/ui_layout/features-grid';
 import StatsPreview from './components/stats-preview';
 
 export default function Home() {

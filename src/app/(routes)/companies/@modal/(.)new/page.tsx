@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import CompanyForm from '@/src/app/components/company-form';
-import Modal from '@/src/app/components/modal';
+import Modal from '@/src/app/components/ui_general/modal';
 
 export default function Page() {
   const router = useRouter();

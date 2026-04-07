@@ -1,8 +1,8 @@
 'use client';
 import { useState } from 'react';
 import CompanyTable from './company-table';
-import Toolbar from './toolbar';
-import SearchInput from './search-input';
+import Toolbar from './ui_general/toolbar';
+import SearchInput from './ui_form/search-input';
 import AddCompanyButton from './add-company-button';
 
 export default function CompaniesClientWrapper() {

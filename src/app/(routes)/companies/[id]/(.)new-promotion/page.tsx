@@ -1,7 +1,7 @@
 'use client';
 
 import { use } from 'react';
-import Modal from '@/src/app/components/modal';
+import Modal from '@/src/app/components/ui_general/modal';
 import PromotionForm from '@/src/app/components/promotion-form';
 import { useRouter } from 'next/navigation';
 

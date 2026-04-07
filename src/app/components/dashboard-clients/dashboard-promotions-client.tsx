@@ -2,9 +2,9 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { getPromotions, Promotion } from '@/src/lib/api';
-import SummaryTable from '@/src/app/components/summary-table';
-import SummaryTableHeader from '@/src/app/components/summary-table-header';
-import SummaryTableCell from '@/src/app/components/summary-table-cell';
+import SummaryTable from '@/src/app/components/ui_table/summary-table';
+import SummaryTableHeader from '@/src/app/components/ui_table/summary-table-header';
+import SummaryTableCell from '@/src/app/components/ui_table/summary-table-cell';
 import DashboardCard from '@/src/app/components/dashboard-card';
 
 export default function DashboardPromotionsClient() {

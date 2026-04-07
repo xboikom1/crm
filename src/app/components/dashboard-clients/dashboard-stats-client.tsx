@@ -29,7 +29,7 @@ export default function DashboardStatsClient() {
   return (
     <div className="grid grid-cols-12 gap-5">
       {(Object.keys(labelByStat) as (keyof SummaryStats)[]).map((key) => (
-        <div key={key} className="col-span-3">
+        <div key={String(key)} className="col-span-3">
           <StatCard
             type={StatCardType.Gradient}
             label={labelByStat[key]}

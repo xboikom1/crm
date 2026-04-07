@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import Button from './button';
+import Button from './ui_form/button';
 
 export interface AddPromotionButtonProps {
   companyId: string;

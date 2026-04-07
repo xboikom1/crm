@@ -1,8 +1,9 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import Header from '@/src/app/components/header';
-import { Company, getCompany } from '@/src/lib/api';
+import Header from '@/src/app/components/ui_layout/header';
+import { getCompany } from '@/src/lib/api';
+import { Company} from '@/src/lib/api';
 
 interface CompanyHeaderClientProps {
   companyId: string;

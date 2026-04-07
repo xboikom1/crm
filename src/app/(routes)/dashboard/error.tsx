@@ -1,6 +1,6 @@
 'use client';
 
-import Button from '@/src/app/components/button';
+import Button from '@/src/app/components/ui_form/button';
 
 export interface ErrorProps {
   reset: () => void;

@@ -1,6 +1,6 @@
 'use client';
 
-import Modal, { ModalProps } from '@/src/app/components/modal';
+import Modal, { ModalProps } from '@/src/app/components/ui_general/modal';
 import CompanyForm, {
   CompanyFormProps,
 } from '@/src/app/components/company-form';

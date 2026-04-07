@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import SidebarItem from '@/src/app/components/sidebar-item';
+import SidebarItem from '@/src/app/components/ui_layout/sidebar-item';
 import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 

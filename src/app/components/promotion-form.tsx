@@ -3,9 +3,9 @@
 import { Form, Formik } from 'formik';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createPromotion, getCompany } from '@/src/lib/api';
-import Button from '@/src/app/components/button';
-import InputField from '@/src/app/components/input-field';
-import LogoUploader from '@/src/app/components/logo-uploader';
+import Button from '@/src/app/components/ui_form/button';
+import InputField from '@/src/app/components/ui_form/input-field';
+import LogoUploader from '@/src/app/components/ui_form/logo-uploader';
 import { useRouter } from 'next/navigation';
 
 export type PromotionFieldValues = {

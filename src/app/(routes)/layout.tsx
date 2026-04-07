@@ -1,4 +1,4 @@
-import Sidebar from '@/src/app/components/sidebar';
+import Sidebar from '@/src/app/components/ui_layout/sidebar';
 
 export interface CompaniesLayoutProps {
   children: React.ReactNode;
